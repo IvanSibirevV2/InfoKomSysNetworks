@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-
+1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>NTttcp</TITLE>
+</HEAD>
+<BODY LINK="#0000ff">
+
+<FONT FACE="Verdana, Arial, Times New Roman" SIZE=5><H2>NTttcp</H2>
+</FONT><FONT FACE="Verdana, Arial, Times New Roman" SIZE=2>
+<P><span style="color:#FF0000;font-size:10pt;font-family:Arial">[This is preliminary 
+documentation and subject to change.]</span></P>
+
+<H3>SUMMARY</H3></FONT><FONT FACE="Verdana, Arial, Times New Roman" SIZE=2><P>
+This tool measures network driver performance and throughput on different network topologies and hardware setups.  It provides the customer with a multi-threaded, asynchronous performance benchmark for measuring achievable data transfer rate on an existing network setup.<p>
+
+<H3>BUILDING THE SAMPLE</H3></FONT><FONT FACE="Verdana, Arial, Times New Roman" 
+SIZE=2><P>
+
+The Microsoft&reg; Windows&reg;&nbsp;2000 DDK includes the NTttcp executable.  No build is required. Note that the same executable is present under two filenames, <i>Ntttcpr.exe</i> (receiver) and <i>Ntttcps.exe</i> (sender).<p>
+
+<H3>USAGE</H3>
+
+<b>Syntax</b><p>
+
+NTttcpR -m 4,0,11.1.1.200 -a [-l | -n | -p | -b | -sb | -rb | -z | -w | -v]<br>
+NTttcpS -m 4,0,11.1.1.200 -a [-l | -n | -p | -b | -sb | -rb | -z | -w | -v]<p>
+
+<b>Parameters List and Default Values</b><p>
+-l specifies the length of the buffer (default: 64K)<br>
+-n specifies number of buffers being used (default: 20K)<br>
+-p specifies the port number being used<br>
+-b disables TCP_NODELAY<br>
+-sb specifies the SO_SNDBUF size (default: zero)<br>
+-rb specifies the SO_RCVBUF size (default: 64K)<br>
+-z disables Virtual Allocation in memory<br>
+-w disables initial Warm-Up period <br>
+-a specifies asynchronous mode (default: four)<br>
+-v specifies verbose mode<br>
+-m is for mapping, and is followed by threads per link, processor number to which to set affinity, and IP address of receiver machine<p>
+
+Note that changing the following registry parameters may affect your results:<p>
+
+1. <b>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Ndis\Parameters\NdisAffinityMask</b> <br>
+This value defaults to 0xFFFF. Changing this to zero may affect throughput.<p>
+2. <b>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpWindowSize</b><br>
+This parameter is not in the registry by default. Set it to 0xFFFF.
+Also, make sure the -a parameter is specified in both <i>ntttcps.exe</i> and <i>ntttcpr.exe</i>.<p>
+
+You can run NTttcp over multiple LAN’s A, B, and C as follows:<p>
+NTttcpS -m 4,0,11.1.1.200  3,0,11.1.1.201  5,1,11.2.1.200 -a -n 5000<p>
+
+· LAN A has 4 threads running over processor 0 going to IP 11.1.1.200<br>
+
+· LAN B has 3 threads running over processor 0 going to IP 11.1.1.201<br>
+
+· LAN C has 5 threads running over processor 1 going to IP 11.2.1.200<p>
+
+     Number of buffers is set to 5000, and this is in ASYNC mode.<p>
+
+· When writing small packet lengths (< 1460 bytes), disable Virtual Memory Allocation.<br>
+
+· When writing small packet lengths (< 1460 bytes), set SO_SNDBUF to 64K on sender system and SO_RCVBUF to zero on receiver system.<br>
+
+· Make sure the IP address of the receiver exists in both <i>ntttcpr</i> and <i>ntttcps</i>.<br>
+
+
+
+
+<p>
+<H3>CODE TOUR</H3>
+<H4>File Manifest</H4>
+</FONT><U><PRE>File&#9;&#9;Description
+</U>
+<i>Ntttcp.htm</i>&#9;Documentation for this tool (this file).
+<i>Ntttcpr.exe</i>&#9;NTttcp receiver executable. 
+<i>Ntttcps.exe</i>&#9;NTttcp sender executable. 
+
+</FONT><P ALIGN="CENTER"><A HREF="#top"><FONT FACE="Verdana, Arial, Times New Roman" SIZE=2>Top of page</FONT></A><FONT FACE="Verdana, Arial, Times New Roman" SIZE=2> </P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 WIDTH=624>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#00ffff" HEIGHT=2>
+<P></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="MS Sans Serif" SIZE=1><P>&copy; 1999 Microsoft Corporation</FONT><FONT FACE="Verdana" SIZE=2> </P></FONT></BODY>
+</HTML>

@@ -1,0 +1,83 @@
+                           PCAUSA Test TCP (PCATTCP)
+                                 Release Notes
+
+                    Printing Communications Associates, Inc.
+                            4201 Brunswick Court
+                            Smyrna, GA 30080 USA
+
+                            TEL: (770) 432-4580
+                            FAX: (770) 436-7246
+                        E-Mail: tdivine@pcausa.com
+
+======================================================================
+Component Part No.: N/A
+Component Name    : PCAUSA Test TCP (PCATTCP)
+======================================================================
+Component Version : 2.01.01.07
+Release Date      : November 23, 2003
+
+1.) Incorporated fix identified by Clarkson University that reduces
+hangs when ending the UDP transmitter test. See additional comments
+in TTCP_TransmitUDP module.
+
+
+======================================================================
+Component Version : 2.01.01.06
+Release Date      : April 5, 2003
+
+1.) Fixed minor bug in TTCP transmitter. PCAUSA PCATTCP preamble was
+not inserted correctly when building transmit buffer.
+
+
+======================================================================
+Component Version : 2.01.01.05
+Release Date      : May 31, 2002
+
+1.) Modification to allow SO_RVCBUF and SO_SNDBUF values of zero(0)
+to be handled. Original implementation did not set these options if
+their value was zero.
+
+2.) Added -w write delay option.
+
+======================================================================
+Component Version : 2.01.01.04
+Release Date      : May 30, 2002
+
+1.) Minor fix to test exit routines.
+
+======================================================================
+Component Version : 2.01.01.03
+Release Date      : May 29, 2002
+
+Externally Visible Differences
+------------------------------
+1.) Added -c "continuous" option:
+   -c       -t: send continuously
+            -r: accept multiple connections sequentially
+
+1.) Added -R multi-threaded concurrent TCP/UDP receiver option.
+
+2.) Fixed error codes. Now fetch using WSAGetLastError instead of perror.
+The latter did not handle socket errors.
+
+3.) Revised test output messages.
+
+4.) New PCATTCP.chm HtmlHelp documentation.
+
+
+Implementation Differences
+--------------------------
+Extensive rework to suit author's style.
+
+
+======================================================================
+Component Version : 1.00.00.02
+Release Date      : January, 2000
+
+Fix setting of setsockopt call for TCP_NODELAY.
+
+======================================================================
+Component Version : 1.00.00.01
+Release Date      : April, 1999
+
+Initial release of PCAUSA's port of TTCP to Windows.

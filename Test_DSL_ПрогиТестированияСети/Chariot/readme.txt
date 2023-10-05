@@ -1,0 +1,1 @@
+For working need start endpoints on all using hosts (including own computer)

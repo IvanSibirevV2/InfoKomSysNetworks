@@ -1,0 +1,3 @@
+endpoint.exe - WebBased Win32
+gsendw32 - full endpoint Win32
+endlnxr.rpm - for Linux
